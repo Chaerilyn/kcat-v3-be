@@ -1,0 +1,12 @@
+# Ignore the local database
+pb_data/
+
+# Ignore local migrations (optional, usually you want to keep these unless they are auto-generated)
+pb_migrations/
+
+# Ignore compiled binaries
+myapp
+*.exe
+
+# Ignore env files
+.env
