@@ -41,7 +41,7 @@ func main() {
 		if record.Collection().Name != COLLECTION {
 			return e.Next()
 		}
-		if record.GetString("video") == "" {
+		if record.GetString("file") == "" {
 			return e.Next()
 		}
 		// Prevent infinite loop: if webp exists, stop.
