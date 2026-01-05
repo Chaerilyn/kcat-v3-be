@@ -51,7 +51,7 @@ func main() {
 
 		// Capture data for the goroutine
 		recordId := record.Id
-		filename := record.GetString("video")
+		filename := record.GetString("file")
 		collectionId := record.Collection().Id
 
 		// 2. Async Processing
