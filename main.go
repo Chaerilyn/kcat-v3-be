@@ -17,7 +17,7 @@ import (
 
 // CONFIGURATION
 const (
-	WORKER_URL    = "https://drinking-universities-moscow-listening.trycloudflare.com/convert"
+	WORKER_URL    = "https://entered-durable-shake-statements.trycloudflare.com/convert"
 	WORKER_SECRET = "super-secret-password-123"
 	COLLECTION    = "contents" // Change to your actual collection name
 )
