@@ -7,6 +7,7 @@ import (
 	"log"
 	"mime/multipart"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/pocketbase/pocketbase"
@@ -22,10 +23,18 @@ const (
 )
 
 func main() {
+	// 1. Set output to Standard Out (Railway captures this)
+	log.SetOutput(os.Stdout)
+
+	// 2. Remove default timestamps (Railway adds its own, and this sometimes helps buffering)
+	log.SetFlags(0)
+
 	app := pocketbase.New()
 
 	// Handler function for file upload events
 	handleConversion := func(e *core.RecordEvent) error {
+		log.Println("Hook Triggered for Collection:", e.Record.Collection().Name)
+
 		record := e.Record
 
 		// 1. Checks: Correct collection? Has video? Webp missing?
