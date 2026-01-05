@@ -17,7 +17,7 @@ import (
 
 // CONFIGURATION
 const (
-	WORKER_URL    = "https://entered-durable-shake-statements.trycloudflare.com/convert"
+	WORKER_URL    = "https://assistant-worked-intake-admission.trycloudflare.com/convert-webp"
 	WORKER_SECRET = "super-secret-password-123"
 	COLLECTION    = "contents" // Change to your actual collection name
 )
@@ -70,7 +70,8 @@ func main() {
 
 			// Retrieve the video file
 			fileKey := colId + "/" + recId + "/" + fName
-			r2File, err := fs.GetFile(fileKey)
+			// GetReader gives you the file stream directly
+			r2File, err := fs.GetReader(fileKey)
 			if err != nil {
 				log.Println("❌ Error finding file in storage:", err)
 				return
