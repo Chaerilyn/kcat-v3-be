@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"io"
+	"kcat-v3-be/bot"
 	"log"
 	"mime/multipart"
 	"net/http"
@@ -30,6 +31,16 @@ func main() {
 	log.SetFlags(0)
 
 	app := pocketbase.New()
+
+	// Start Discord bot in a goroutine after Pocketbase is initialized
+	go func() {
+		// Wait for Pocketbase to fully initialize
+		time.Sleep(2 * time.Second)
+		log.Println("🤖 Starting Discord bot...")
+		if err := bot.Start(app); err != nil {
+			log.Println("❌ Failed to start Discord bot:", err)
+		}
+	}()
 
 	// Handler function for file upload events
 	handleConversion := func(e *core.RecordEvent) error {
@@ -115,7 +126,6 @@ func main() {
 
 	// Register hooks
 	app.OnRecordAfterCreateSuccess(COLLECTION).BindFunc(handleConversion)
-	app.OnRecordAfterUpdateSuccess(COLLECTION).BindFunc(handleConversion)
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)
